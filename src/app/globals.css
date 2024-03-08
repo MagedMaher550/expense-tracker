@@ -1,0 +1,16 @@
+/* * {
+    outline: 1px solid #f00 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+} */
+
+* {
+  font-family: 'bariolRegularFont';
+}
+
+@font-face {
+  font-family: 'bariolRegularFont';
+  src:
+      local('bariolRegularFont'),
+      url(../packages/fonts/bariol_regular-webfont.woff) format('woff');
+}
