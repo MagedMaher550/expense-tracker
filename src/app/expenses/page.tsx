@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { Box, Button, Typography } from "@mui/material";
-import AddExpense from "@/src/components/add-expense";
+import AddExpense from "@/src/components/action-sheet";
 import ResetExpenses from "@/src/components/reset-expenses";
 import Expenses from "@/src/components/expenses-list";
 import Loader from "@/src/packages/components/loader";
@@ -16,7 +16,7 @@ export default function ExpensesHome(): JSX.Element {
   }, []);
 
   return screenLoaded ? (
-    <Box>
+    <Box sx={{margin: "1rem 0.5rem"}}>
       <Box
         sx={{
           display: "flex",

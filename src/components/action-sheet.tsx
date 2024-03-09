@@ -1,34 +1,35 @@
-"use client";
 import React, { SetStateAction } from "react";
 import ConfirmDialog from "../packages/components/confirm-dialogue";
 import { Box, Stack, TextField } from "@mui/material";
-import { addExpense } from "../utils/localstorage";
+import { addExpense, editExpense } from "../redux/expenses-slice";
 import { setSnackbar } from "../redux/snackbar-slice";
 import { useDispatch } from "react-redux";
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import z from "zod";
+import { Expense } from "../types";
 
-interface AddExpenseProps {
+interface ActionSheetProps {
+  isEdit?: boolean;
+  expense?: Expense;
   open: boolean;
   setOpen: React.Dispatch<SetStateAction<boolean>>;
 }
 
-function AddExpense({ open, setOpen }: AddExpenseProps): JSX.Element {
+function ActionSheet({
+  open,
+  setOpen,
+  expense,
+  isEdit,
+}: ActionSheetProps): JSX.Element {
   const dispatch = useDispatch();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<Expense>({
     mode: "onBlur",
-    defaultValues: {
-      title: "",
-      category: "",
-      price: 0,
-      quantity: 0,
-    },
     resolver: zodResolver(
       z.object({
         title: z.string().min(1, { message: "Title is required" }),
@@ -37,13 +38,26 @@ function AddExpense({ open, setOpen }: AddExpenseProps): JSX.Element {
         quantity: z.coerce.number().min(1, { message: "Quantity is required" }),
       })
     ),
+    defaultValues: {
+      title: expense ? expense.title : "",
+      category: expense ? expense.category : "",
+      price: expense ? expense.price : 0,
+      quantity: expense ? expense.quantity : 0,
+    },
   });
 
   const onSubmit = (data: any) => {
-    addExpense(data);
+    let message = "";
+    if (isEdit) {
+      dispatch(editExpense({ ...data, id: expense?.id, date: expense?.date }));
+      message = "Expense Updated Successfully";
+    } else {
+      dispatch(addExpense(data));
+      message = "Expense Added Successfully";
+    }
     dispatch(
       setSnackbar({
-        message: "Expense Added Successfully",
+        message,
         isSuccess: true,
       })
     );
@@ -52,8 +66,8 @@ function AddExpense({ open, setOpen }: AddExpenseProps): JSX.Element {
 
   return (
     <ConfirmDialog
-      title="Add Expense"
-      actionTitle="Add"
+      title={isEdit ? "Edit Expense" : "Add Expense"}
+      actionTitle={isEdit ? "Edit" : "Add"}
       action={handleSubmit(onSubmit)}
       open={open}
       setOpen={setOpen}
@@ -115,4 +129,4 @@ function AddExpense({ open, setOpen }: AddExpenseProps): JSX.Element {
   );
 }
 
-export default AddExpense;
+export default React.memo(ActionSheet);

@@ -14,7 +14,7 @@ function ResetExpenses({ open, setOpen }: ResetExpensesProps): JSX.Element {
 
   return (
     <ConfirmDialog
-      isReset
+      isDanger
       title="Reset Expenses"
       subTitle="Are you sure you want to reset all expenses? All added expenses will be deleted."
       actionTitle="Reset"
