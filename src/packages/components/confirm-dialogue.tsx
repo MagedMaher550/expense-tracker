@@ -21,7 +21,7 @@ interface Props {
   content?: JSX.Element;
   disableButton?: boolean;
   largeButton?: boolean;
-  isReset?: boolean;
+  isDanger?: boolean;
 }
 
 const Transition = React.forwardRef(function Transition(
@@ -43,7 +43,7 @@ function ConfirmDialog({
   content,
   disableButton = false,
   largeButton = false,
-  isReset = false,
+  isDanger = false,
 }: Props) {
   const btnStyle = {
     margin: "5px",
@@ -86,7 +86,7 @@ function ConfirmDialog({
       </DialogContent>
       <Box style={{ margin: "15px" }}>
         <Button
-          color={isReset ? "error" : "primary"}
+          color={isDanger ? "error" : "primary"}
           variant="contained"
           onClick={action}
           style={btnStyle}
