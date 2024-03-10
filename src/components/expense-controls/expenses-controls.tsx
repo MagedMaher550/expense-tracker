@@ -1,8 +1,10 @@
-import { Box } from "@mui/material";
+import { Box, Stack } from "@mui/material";
+import Image from "next/image";
 import React, { SetStateAction } from "react";
 import AddExpense from "@/src/components/expense-controls/action-sheet";
 import ResetExpenses from "@/src/components/expense-controls/reset-expenses";
 import ModalButton from "./ModalButton";
+import Search from "./search";
 
 interface ExpensesControlsProps {
   addExpense: boolean;
@@ -21,14 +23,32 @@ function ExpensesControls({
     <Box
       sx={{
         display: "flex",
-        justifyContent: "end",
+        justifyContent: "space-evenly",
+        marginBottom: "2rem",
       }}
     >
-      <ModalButton setOpen={setAddExpense} label="Add Expense" mr />
-      <ModalButton setOpen={setResetExpenses} label="Reset Expenses" isDanger />
+      <Image
+        alt="Expense Tracker"
+        height={40}
+        src="/logo.png" // Assuming your image is in the public directory
+        style={{
+          display: "block",
+          margin: "0 auto",
+        }}
+        width={170}
+      />
+      <Search width="50%" />
+      <Stack direction="row" sx={{ marginLeft: "5%" }}>
+        <ModalButton setOpen={setAddExpense} label="Add Expense" mr />
+        <ModalButton
+          setOpen={setResetExpenses}
+          label="Reset Expenses"
+          isDanger
+        />
 
-      <AddExpense open={addExpense} setOpen={setAddExpense} />
-      <ResetExpenses open={resetExpenses} setOpen={setResetExpenses} />
+        <AddExpense open={addExpense} setOpen={setAddExpense} />
+        <ResetExpenses open={resetExpenses} setOpen={setResetExpenses} />
+      </Stack>
     </Box>
   );
 }

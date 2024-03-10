@@ -32,9 +32,28 @@ const expensesSlice = createSlice({
         localStorage.setItem("expenses", JSON.stringify(state.expenses));
       }
     },
+    searchExpense(state, action) {
+      const searchTerm = action.payload.toLowerCase();
+      const expenses = getData();
+      const searchResults = expenses.filter(
+        (expense) =>
+          expense.title.toLowerCase().includes(searchTerm) ||
+          expense.category.toLowerCase().includes(searchTerm)
+      );
+      state.expenses = searchResults;
+    },
+    clearSearch(state) {
+      state.expenses = getData();
+    },
   },
 });
 
-export const { addExpense, deleteExpense, editExpense } = expensesSlice.actions;
+export const {
+  addExpense,
+  deleteExpense,
+  editExpense,
+  searchExpense,
+  clearSearch,
+} = expensesSlice.actions;
 
 export default expensesSlice.reducer;
