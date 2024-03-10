@@ -1,7 +1,8 @@
-import { Box, Button } from "@mui/material";
+import { Box } from "@mui/material";
 import React, { SetStateAction } from "react";
-import AddExpense from "@/src/components/action-sheet";
-import ResetExpenses from "@/src/components/reset-expenses";
+import AddExpense from "@/src/components/expense-controls/action-sheet";
+import ResetExpenses from "@/src/components/expense-controls/reset-expenses";
+import ModalButton from "./ModalButton";
 
 interface ExpensesControlsProps {
   addExpense: boolean;
@@ -24,7 +25,6 @@ function ExpensesControls({
       }}
     >
       <ModalButton setOpen={setAddExpense} label="Add Expense" mr />
-
       <ModalButton setOpen={setResetExpenses} label="Reset Expenses" isDanger />
 
       <AddExpense open={addExpense} setOpen={setAddExpense} />
@@ -34,30 +34,3 @@ function ExpensesControls({
 }
 
 export default ExpensesControls;
-
-interface ModalButtonProps {
-  setOpen: React.Dispatch<SetStateAction<boolean>>;
-  mr?: boolean;
-  isDanger?: boolean;
-  label: string;
-}
-
-function ModalButton({
-  setOpen,
-  mr,
-  label,
-  isDanger,
-}: ModalButtonProps): JSX.Element {
-  return (
-    <Button
-      color={isDanger ? "error" : "primary"}
-      sx={{ mr: mr ? "1rem" : "" }}
-      variant="contained"
-      onClick={() => {
-        setOpen(true);
-      }}
-    >
-      {label}
-    </Button>
-  );
-}
