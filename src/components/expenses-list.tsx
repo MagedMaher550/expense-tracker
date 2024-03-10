@@ -14,8 +14,8 @@ export default function Expenses(): JSX.Element {
   // get all expenses grouped by day
   const groupedExpenses = groupExpensesByDay(expenses);
 
-  // convert it to two grids, each of which contains all expenses in that day
-  const groupedExpensesContent = Object.keys(groupedExpenses).map(
+  // convert it to several grids, each of which contains all expenses in that day
+  const groupedExpensesContent = Object.keys(groupedExpenses).reverse().map(
     (expensesDay, index, array) => {
       const isLastDay = index === array.length - 1;
       return (
@@ -29,7 +29,7 @@ export default function Expenses(): JSX.Element {
     }
   );
 
-  // merge the two grids in one box
+  // merge the grids in one box
   const ExpensesList = (
     <Box sx={{ display: "flex", flexDirection: "column", mt: "1rem" }}>
       {groupedExpensesContent}
