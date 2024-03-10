@@ -1,13 +1,13 @@
 import React, { SetStateAction } from "react";
-import ConfirmDialog from "../packages/components/confirm-dialogue";
+import ConfirmDialog from "../../packages/components/confirm-dialogue";
 import { Box, Stack, TextField } from "@mui/material";
-import { addExpense, editExpense } from "../redux/expenses-slice";
-import { setSnackbar } from "../redux/snackbar-slice";
+import { addExpense, editExpense } from "../../redux/expenses-slice";
+import { setSnackbar } from "../../redux/snackbar-slice";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import z from "zod";
-import { Expense } from "../types";
+import { Expense } from "../../types";
 
 interface ActionSheetProps {
   isEdit?: boolean;

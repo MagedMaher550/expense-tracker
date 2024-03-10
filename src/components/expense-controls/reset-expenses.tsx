@@ -1,7 +1,7 @@
 import React, { SetStateAction } from "react";
-import ConfirmDialog from "../packages/components/confirm-dialogue";
-import { resetExpenses } from "../utils/localstorage";
-import { setSnackbar } from "../redux/snackbar-slice";
+import ConfirmDialog from "../../packages/components/confirm-dialogue";
+import { resetExpenses } from "../../utils/localstorage";
+import { setSnackbar } from "../../redux/snackbar-slice";
 import { useDispatch } from "react-redux";
 
 interface ResetExpensesProps {

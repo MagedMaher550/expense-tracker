@@ -6,7 +6,7 @@ import { SetStateAction, useState } from "react";
 import ConfirmDialog from "../packages/components/confirm-dialogue";
 import { useDispatch } from "react-redux";
 import { deleteExpense } from "../redux/expenses-slice";
-import EditExpense from "./action-sheet";
+import EditExpense from "./expense-controls/action-sheet";
 
 function Expense({ expense }: { expense: ExpenseType }): JSX.Element {
   const { id, title, price, quantity, category } = expense;
